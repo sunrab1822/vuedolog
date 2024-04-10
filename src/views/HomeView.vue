@@ -3,6 +3,7 @@ import dataservice from "../services/dataservice.js";
 import { ref } from "vue";
 
 const watches = ref([]);
+const firstPage = ref(1)
 const actPage = ref(1);
 const lastPage = ref();
 const searchString = ref("")
@@ -46,19 +47,27 @@ const search = () => {
       console.log(err);
     });
 }
+
+
 </script>
 
 <template>
   <div class="container">
     <h1 class="text-center">Lapozás</h1>
-    <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex justify-content-around  mb-2">
       <select class="form-select w-25" aria-label="Default select example" v-model="limit" @change="search">
         <option :value="10" selected>Select Size</option>
         <option v-for="num in 25" :value="num">{{ num }}</option>
       </select>
-      <input type="text" class="form-control" name="" v-model="searchString" @keyup="search" id="">
-      <button class="btn btn-primary" @click="search">Keresés</button>
+      <input type="text" class="form-control w-50" name="" v-model="searchString" @keyup="search" id="">
+      <button class="btn btn-success" @click="search">Keresés</button>
     </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-success" @click="lep(firstPage)">elő</button>
+      <button class="btn btn-success" @click="lep(lastPage)">utolsó</button>
+
+    </div>
+
 
     <nav class="d-flex justify-content-center" aria-label="Page navigation example">
       <ul class="pagination">
@@ -86,7 +95,7 @@ const search = () => {
 
 
     <div class="row">
-      <div v-for="watch in watches" class="col-12 col-md-6 col-xl-4">
+      <div v-for="watch in watches" class="col-12 col-md-6 col-xl-4 mb-2 mx-auto">
         <div class="card w-100">
           <div class="card-body">
             <h5 class="card-title">{{ watch.Model }}</h5>
