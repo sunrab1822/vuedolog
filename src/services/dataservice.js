@@ -2,8 +2,8 @@ import Axios from 'axios';
 Axios.defaults.baseURL = 'http://localhost:3000';
 
 export default {
-    getAllWatches(page, search){
-        return Axios.get(`/watches?_page=${page}&Model_like=${search}`) 
+    getAllWatches(page, search,limit){
+        return Axios.get(`/watches?_page=${page}&_limit=${limit}&Model_like=${search}&_expand=brand`)
     },
     // kivalasztottGyartoAutoi(manufacturerid){
     //     return Axios.get(`/api/cars/${manufacturerid}`)
